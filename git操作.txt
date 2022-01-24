@@ -4,3 +4,6 @@ git commit -m "wrote a readme file" 添加提交说明
 git status 查看工作区的状态，
 git diff readme.txt 比较文件不同
 如果git status告诉你有文件被修改过，用git diff可以查看修改内容
+
+git reset --hard HEAD^ 回退上一个版本 
+git reset --hard commitid前几位即可 回退到对应版本
