@@ -1,9 +1,11 @@
 git init 初始化仓库
-git add  readme.txt 提交文件，该文件必须在仓库目录下
-git commit -m "wrote a readme file" 添加提交说明
+git add  readme.txt 提交文件，该文件必须在仓库目录下  把文件修改添加到暂存区(stage)
+git commit -m "wrote a readme file" 添加提交说明   把暂存区的所有内容提交到当前分支,且只提交暂存区的内容，若修改后的内容未添加到暂存区，则不会被提交
 git status 查看工作区的状态，
 git diff readme.txt 比较文件不同
 如果git status告诉你有文件被修改过，用git diff可以查看修改内容
 git log --pretty=oneline 显示版本记录 （只显示一行）
 git reset --hard HEAD^ 回退上一个版本 
-git reset --hard commitid前几位即可 回退到对应版本
+git reset --hard commit_id前几位即可 回退到对应版本
+git reflog 用来记录你的每一次命令
+
