@@ -257,3 +257,66 @@ Merge made by the 'recursive' strategy.
 
 ```
 修复bug后，删除bug分支，切换回dev继续工作
+```
+Administrator@DESKTOP-U24771V MINGW64 /e/gitRepository (dev)
+$ git status
+On branch dev
+nothing to commit, working tree clean
+
+Administrator@DESKTOP-U24771V MINGW64 /e/gitRepository (dev)
+$ git stash list
+stash@{0}: WIP on dev: 75132a1 分支策略完成
+```
+工作现场还在，Git把stash内容存在某个地方了，但是需要恢复一下，有两个办法：
+
+一是用git stash apply恢复，但是恢复后，stash内容并不删除，你需要用git stash drop来删除；
+另一种方式是用git stash pop，恢复的同时把stash内容也删了：
+
+```
+Administrator@DESKTOP-U24771V MINGW64 /e/gitRepository (dev)
+$ git stash pop  
+On branch dev
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   "git\346\223\215\344\275\234.md"
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Dropped refs/stash@{0} (d627e66cbff06f7d565d3005d7a07971b87fd9d0)
+
+Administrator@DESKTOP-U24771V MINGW64 /e/gitRepository (dev)
+$ git stash list
+此时看不到stash内容了
+```
+在master分支上修复了bug后，怎么在dev分支上修复同样的bug
+同样的bug，要在dev上修复，我们只需要把ca42a72 修复bug，删除bug分支这个提交所做的修改“复制”到dev分支。注意：我们只想复制ca42a72 修复bug，删除bug分支这个提交所做的修改，并不是把整个master分支merge过来。
+
+为了方便操作，Git专门提供了一个cherry-pick命令，让我们能复制一个特定的提交到当前分支：
+```
+$ git cherry-pick ca42a72
+error: Your local changes to the following files would be overwritten by merge:
+        git操作.md
+Please commit your changes or stash them before you merge.
+Aborting
+fatal: cherry-pick failed
+
+Administrator@DESKTOP-U24771V MINGW64 /e/gitRepository (dev)
+$ git commit -a -m x
+[dev c28908d] x
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+Administrator@DESKTOP-U24771V MINGW64 /e/gitRepository (dev)
+$ git cherry-pick ca42a72
+Auto-merging git操作.md
+CONFLICT (content): Merge conflict in git操作.md
+error: could not apply ca42a72... 修复bug，删除bug分支
+hint: after resolving the conflicts, mark the corrected paths
+hint: with 'git add <paths>' or 'git rm <paths>'
+hint: and commit the result with 'git commit'
+
+Administrator@DESKTOP-U24771V MINGW64 /e/gitRepository (dev|CHERRY-PICKING)
+$ git commit -a -m 将bug修复的内容同步到dev上
+[dev eae664c] 将bug修复的内容同步到dev上
+ Date: Tue Feb 8 17:37:55 2022 +0800
+ 1 file changed, 37 insertions(+), 1 deletion(-)
+```
