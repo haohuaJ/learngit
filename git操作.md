@@ -98,6 +98,8 @@ git clone git@github.com:git地址
 先切换回master分支再进行合并
 git switch master
 git merge dev
+当前分支有未提交的内容，则不允许切换分支。会报错
 合并某分支到当前分支：git merge <name>
 
-删除分支：git branch -d <name>
+删除本地仓库分支：git branch -d <name>
+删除远程仓库分支：
