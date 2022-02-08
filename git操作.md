@@ -238,4 +238,22 @@ Your branch is up to date with 'origin/master'.
 Administrator@DESKTOP-U24771V MINGW64 /e/gitRepository (master)
 $ git checkout -b issue-101
 Switched to a new branch 'issue-101'
+
+Administrator@DESKTOP-U24771V MINGW64 /e/gitRepository (issue-101)
+$ git commit -a -m 测试bug分支
+[issue-101 7ce0159] 测试bug分支
+ 1 file changed, 22 insertions(+), 1 deletion(-)
+
+Administrator@DESKTOP-U24771V MINGW64 /e/gitRepository (issue-101)
+$ git switch master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+
+Administrator@DESKTOP-U24771V MINGW64 /e/gitRepository (master)
+$ git merge --no-ff -m "merged bug fix 101" issue-101
+Merge made by the 'recursive' strategy.
+ "git\346\223\215\344\275\234.md" | 23 ++++++++++++++++++++++-
+ 1 file changed, 22 insertions(+), 1 deletion(-)
+
 ```
+修复bug后，删除bug分支，切换回dev继续工作
