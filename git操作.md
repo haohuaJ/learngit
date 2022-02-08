@@ -220,4 +220,40 @@ merge的不同行为，向后看，其实最终都会将代码合并到master分
 --no-ff  master进行reset操作时，无论合并前dev分支进行了多少次提交操作，会回滚到master合并前的版本
 
 ## bug分支
-当前工作分支dev尚无法提交，有需要重新开启一个bug分支时，可使用
+当前工作分支dev尚无法提交，有需要重新开启一个bug分支时，可使用、
+git stash 可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作
+```
+$ git stash
+Saved working directory and index state WIP on dev: 75132a1 分支策略完成
+```
+现在，用git status查看工作区，就是干净的（除非有没有被Git管理的文件），因此可以放心地创建分支来修复bug。
+
+首先确定要在哪个分支上修复bug，假定需要在master分支上修复，就从master创建临时分支：
+```
+Administrator@DESKTOP-U24771V MINGW64 /e/gitRepository (dev)
+$ git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+
+Administrator@DESKTOP-U24771V MINGW64 /e/gitRepository (master)
+$ git checkout -b issue-101
+Switched to a new branch 'issue-101'
+
+Administrator@DESKTOP-U24771V MINGW64 /e/gitRepository (issue-101)
+$ git commit -a -m 测试bug分支
+[issue-101 7ce0159] 测试bug分支
+ 1 file changed, 22 insertions(+), 1 deletion(-)
+
+Administrator@DESKTOP-U24771V MINGW64 /e/gitRepository (issue-101)
+$ git switch master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+
+Administrator@DESKTOP-U24771V MINGW64 /e/gitRepository (master)
+$ git merge --no-ff -m "merged bug fix 101" issue-101
+Merge made by the 'recursive' strategy.
+ "git\346\223\215\344\275\234.md" | 23 ++++++++++++++++++++++-
+ 1 file changed, 22 insertions(+), 1 deletion(-)
+
+```
+修复bug后，删除bug分支，切换回dev继续工作
