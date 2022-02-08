@@ -95,6 +95,9 @@ git clone git@github.com:git地址
 
 创建+切换分支：git checkout -b <name>或者git switch -c <name>
 
+先切换回master分支再进行合并
+git switch master
+git merge dev
 合并某分支到当前分支：git merge <name>
 
 删除分支：git branch -d <name>
