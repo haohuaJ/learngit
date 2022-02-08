@@ -199,3 +199,22 @@ git branch -d feature1
 那在哪干活呢？干活都在dev分支上，也就是说，dev分支是不稳定的，到某个时候，比如1.0版本发布时，再把dev分支合并到master上，在master分支发布1.0版本；
 
 每个人都在dev分支上干活，每个人都有自己的分支，时不时地往dev分支上合并就可以了。
+```
+ git merge --no-ff -m "merge with no-ff" dev
+```
+git merge 模式不同，效果不同
+fast-forward -ff 默认
+
+Git 合并两个分支时，如果顺着一个分支走下去可以到达另一个分支的话，那么 Git 在合并两者时，只会简单地把指针右移，叫做“快进”（fast-forward）不过这种情况如果删除分支，则会丢失merge分支信息。
+
+–squash
+
+把一些不必要commit进行压缩，比如说，你的feature在开发的时候写的commit很乱，那么我们合并的时候不希望把这些历史commit带过来，于是使用–squash进行合并，此时文件已经同合并后一样了，但不移动HEAD，不提交。需要进行一次额外的commit来“总结”一下，然后完成最终的合并。
+
+–no-ff
+
+关闭fast-forward模式，在提交的时候，会创建一个merge的commit信息，然后合并的和master分支
+merge的不同行为，向后看，其实最终都会将代码合并到master分支，而区别仅仅只是分支上的简洁清晰的问题，然后，向前看，也就是我们使用reset 的时候，就会发现，不同的行为就带来了不同的影响
+
+--ff(默认不需要带此参数)master进行reset操作时，如果合并前dev分支进行了多次提交操作，会回滚到分支提交的最后一个版本，其内容已经融入到要合并的分支（master）中
+--no-ff  master进行reset操作时，无论合并前dev分支进行了多少次提交操作，会回滚到master合并前的版本
