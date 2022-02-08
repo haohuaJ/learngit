@@ -60,10 +60,13 @@ Warning: Permanently added 'github.com' (RSA) to the list of known hosts.
 如果添加的时候地址写错了，或者就是想删除远程库，可以用git remote rm <name>命令。使用前，建议先用git remote -v查看远程库信息：
 
 $ git remote -v
-origin  git@github.com:michaelliao/learn-git.git (fetch)
-origin  git@github.com:michaelliao/learn-git.git (push)
+origin  git@github.com:haohuaJ/learngit.git (fetch)
+origin  git@github.com:haohuaJ/learngit.git (push)
 然后，根据名字删除，比如删除origin：
 
 $ git remote rm origin
 此处的“删除”其实是解除了本地和远程的绑定关系，并不是物理上删除了远程库。远程库本身并没有任何改动。要真正删除远程库，需要登录到GitHub，
 在后台页面找到删除按钮再删除。
+
+从远程库克隆
+git clone ...
