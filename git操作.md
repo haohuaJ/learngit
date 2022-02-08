@@ -144,3 +144,35 @@ no changes added to commit (use "git add" and/or "git commit -a")
 ```
 直接查看冲突文件内容
 Git用<<<<<<<，=======，>>>>>>>标记出不同分支的内容，我们修改如下后保存：
+
+```
+$ git commit -a -m 修改冲突后提交
+[master 6ffe415] 修改冲突后提交
+```
+使用 git log --graph命令可以看到分支合并图
+```
+$ git log --graph --pretty=oneline --abbrev-commit
+*   6ffe415 (HEAD -> master) 修改冲突后提交
+|\
+| * b448b39 (feature1) 添加并修改新分支内容
+* | e0ea07b 修改master分支内容
+|/
+* 0a40e05 添加
+* 96c4027 (origin/master) x
+* 87087c6 增加分支dev
+* a76a6dc 将txt换位md文件
+* a848a78 修改内容14:05
+* af81fd3 修改内容13:58
+* 923ecce 删除文件
+* e75b0c8 删除文件
+* eb3ec1d 更新内容
+* 2ec5fde 测试删除文件
+* cb2a912 添加暂存区概念
+* 435dac1 修改命令操作文档
+* 1b4f069 修改命令操作文档
+* 0de48db 添加git命令操作
+* 0c66f18 add distributed
+* 816ea99 wrote a readme file
+```
+删除分支
+git branch -d feature1
