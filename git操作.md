@@ -115,3 +115,32 @@ git switch master
 Your branch is ahead of 'origin/master' by 1 commit.
   (use "git push" to publish your local commits)
 ```
+git commit -a -m 修改master分支内容
+此时 master分支和feature1分支各自都分别有新的提交
+这种情况下，Git无法执行“快速合并”，只能试图把各自的修改合并起来，但这种合并就可能会有冲突
+```
+$ git merge feature1
+Auto-merging git操作.md
+CONFLICT (content): Merge conflict in git操作.md
+Automatic merge failed; fix conflicts and then commit the result.
+```
+git status也可以告诉我们冲突的文件
+```
+$ git status
+On branch master
+Your branch is ahead of 'origin/master' by 2 commits.
+  (use "git push" to publish your local commits)
+
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+        both modified:   "git\346\223\215\344\275\234.md"
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+```
+直接查看冲突文件内容
+Git用<<<<<<<，=======，>>>>>>>标记出不同分支的内容，我们修改如下后保存：
