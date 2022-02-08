@@ -3,6 +3,7 @@
 git init 初始化仓库
 git add  readme.txt 提交文件，该文件必须在仓库目录下  把文件修改添加到暂存区(stage)
 git commit -m "wrote a readme file" 添加提交说明   把暂存区的所有内容提交到当前分支,且只提交暂存区的内容，若修改后的内容未添加到暂存区，则不会被提交
+git commit -a -m  省一步 git add ，但也只是对修改和删除文件有效， 新文件还是要 git add，不然就是 untracked 状态
 git status 查看工作区的状态，
 git diff readme.txt 比较文件不同
 如果git status告诉你有文件被修改过，用git diff可以查看修改内容
@@ -91,7 +92,8 @@ git clone git@github.com:git地址
 
 创建分支：git branch <name>
 
-切换分支：git checkout <name>或者git switch <name> 切换后可以看到切换到的分支颜色变了，也就是指向了该分支
+切换分支：git checkout <name>或者git switch <name> 
+前面带有*号的是当前分支
 
 创建+切换分支：git checkout -b <name>或者git switch -c <name>
 
@@ -100,6 +102,8 @@ git switch master
 git merge dev
 当前分支有未提交的内容，则不允许切换分支。会报错
 合并某分支到当前分支：git merge <name>
-
 删除本地仓库分支：git branch -d <name>
-删除远程仓库分支：
+删除远程仓库分支：git push origin --delete [branchname]
+根据指定版本号创建分支: git checkout -b branchName commitId
+清理本地无效分支(远程已删除本地没删除的分支): git fetch -p
+如果分支太多，还可以用此命令进行分支模糊查找: git branch | grep 'branchName'
