@@ -1,21 +1,36 @@
 # 创建版本库
 ## 基本操作命令
 git init 初始化仓库
+
 git add  readme.txt 提交文件，该文件必须在仓库目录下  把文件修改添加到暂存区(stage)
+
 git commit -m "wrote a readme file" 添加提交说明   把暂存区的所有内容提交到当前分支,且只提交暂存区的内容，若修改后的内容未添加到暂存区，则不会被提交
+
 git commit -a -m  省一步 git add ，但也只是对修改和删除文件有效， 新文件还是要 git add，不然就是 untracked 状态
-git status 查看工作区的状态，
+
+git status 查看工作区的状态
+
 git diff readme.txt 比较文件不同
 如果git status告诉你有文件被修改过，用git diff可以查看修改内容
+
 git log --pretty=oneline 显示版本记录 （只显示一行）
+
 git reset --hard HEAD^ 回退上一个版本 
+
 git reset --hard commit_id前几位即可 回退到对应版本
+
 git reflog 用来记录你的每一次命令
+
 git restore file 回退工作区的修改(删除)
+
 git restore --staged <file> 回退已添加到暂存区的修改
+
 rm file 删除文件
+
 git rm <file> 删除git 之后提交
+
 git checkout -- <file> 作用等同 git restore file
+
 # 远程仓库
 ## 添加远程仓库
 第1步：创建SSH Key。在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件，如果已经有了，可直接跳到下一步。
