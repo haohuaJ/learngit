@@ -380,3 +380,52 @@ git tag
 ```
 git show <tagname>
 ```
+## 操作标签
+
+如果标签打错了，也可以删除：
+```
+$ git tag -d v1.0
+Deleted tag 'v1.0' (was 5fddf6e)
+
+```
+因为创建的标签都只存储在本地，不会自动推送到远程。所以，打错的标签可以在本地安全删除。
+
+如果要推送某个标签到远程，使用命令git push origin <tagname>：
+```
+$ git push origin v1.1
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 577 bytes | 577.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To github.com:haohuaJ/learngit.git
+ * [new tag]         v1.1 -> v1.1
+```
+或者，一次性推送全部尚未推送到远程的本地标签：
+```
+$ git push origin --tags
+```
+如果标签已经推送到远程，要删除远程标签就麻烦一点，先从本地删除：
+```
+$ git tag -d v1.1
+Deleted tag 'v1.1' (was caeb170)
+```
+
+然后，从远程删除。删除命令也是push，但是格式如下：
+```
+$ git push origin :refs/tags/v1.1
+To github.com:haohuaJ/learngit.git
+ - [deleted]         v1.1
+```
+要看看是否真的从远程库删除了标签，可以登陆GitHub查看
+
+# 修改开源git
+在GitHub上，可以任意Fork开源仓库；
+
+自己拥有Fork后的仓库的读写权限；
+
+可以推送pull request给官方仓库来贡献代码。
+# gitee
+gitee如上操作先添加ssh key，再创建项目，添加仓库。。。
