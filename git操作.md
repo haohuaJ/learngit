@@ -220,11 +220,7 @@ merge的不同行为，向后看，其实最终都会将代码合并到master分
 --no-ff  master进行reset操作时，无论合并前dev分支进行了多少次提交操作，会回滚到master合并前的版本
 
 ## bug分支
-<<<<<<< HEAD
 当前工作分支dev尚无法提交，有需要重新开启一个bug分支时，可使用
-=======
-当前工作分支dev尚无法提交，有需要重新开启一个bug分支时，可使用、
->>>>>>> dev
 git stash 可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作
 ```
 $ git stash
@@ -324,4 +320,7 @@ $ git commit -a -m 将bug修复的内容同步到dev上
  Date: Tue Feb 8 17:37:55 2022 +0800
  1 file changed, 37 insertions(+), 1 deletion(-)
 ```
+## feature分支
+开发一个新feature，最好新建一个分支；
 
+如果要丢弃一个没有被合并过的分支，可以通过git branch -D <name>强行删除。
