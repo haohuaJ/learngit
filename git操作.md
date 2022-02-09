@@ -324,3 +324,38 @@ $ git commit -a -m 将bug修复的内容同步到dev上
 开发一个新feature，最好新建一个分支；
 
 如果要丢弃一个没有被合并过的分支，可以通过git branch -D <name>强行删除。
+
+##多人协作
+抓取分支
+1.下载远程仓库代码
+```
+git clone git@github.com:haohuaJ/config-repo
+```
+2.创建远程仓库对应的开发分支
+```
+git checkout -b dev origin/dev
+origin为远程仓库名称
+```
+3.提交dev时由于多人操作提交发生冲突
+```
+$ git pull
+There is no tracking information for the current branch.
+Please specify which branch you want to merge with.
+See git-pull(1) for details.
+
+    git pull <remote> <branch>
+
+If you wish to set tracking information for this branch you can do so with:
+
+    git branch --set-upstream-to=origin/<branch> dev
+```
+git pull也失败了，原因是没有指定本地dev分支与远程origin/dev分支的链接，根据提示，设置dev和origin/dev的链接：
+```
+$ git branch --set-upstream-to=origin/dev dev
+Branch 'dev' set up to track remote branch 'dev' from 'origin'.
+```
+再次执行pull操作
+```
+$ git pull
+```
+4.解决冲突后提交。
