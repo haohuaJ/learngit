@@ -325,7 +325,7 @@ $ git commit -a -m 将bug修复的内容同步到dev上
 
 如果要丢弃一个没有被合并过的分支，可以通过git branch -D <name>强行删除。
 
-##多人协作
+## 多人协作
 抓取分支
 1.下载远程仓库代码
 ```
@@ -359,3 +359,24 @@ Branch 'dev' set up to track remote branch 'dev' from 'origin'.
 $ git pull
 ```
 4.解决冲突后提交。
+
+# 标签管理
+## 创建标签
+命令git tag <tagname>用于新建一个标签，默认为HEAD，也可以指定一个commit id；
+```
+git tag <tagname>
+git tag <tagname> commitid
+```
+命令git tag -a <tagname> -m "blablabla..."可以指定标签信息；
+```
+git tag -a <tagname> -m "blablabla..."
+git tag -a <tagname> -m "blablabla..." commitid
+```
+命令git tag可以查看所有标签。
+```
+git tag
+```
+命令git show <tagname>可以看到说明文字：
+```
+git show <tagname>
+```
