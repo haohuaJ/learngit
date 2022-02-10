@@ -457,16 +457,17 @@ $ git config --global alias.st status
 ``````
 
 当然还有别的命令可以简写，很多人都用co表示checkout，ci表示commit，br表示branch：
-
+```
 $ git config --global alias.co checkout
 $ git config --global alias.ci commit
 $ git config --global alias.br branch
+```
 以后提交就可以简写成：
 
 $ git ci -m "bala bala bala..."
 --global参数是全局参数，也就是这些命令在这台电脑的所有Git仓库下都有用。
 
-在撤销修改一节中，我们知道，命令git reset HEAD file可以把暂存区的修改撤销掉（unstage），重新放回工作区。既然是一个unstage操作，就可以配置一个unstage别名：
+命令git reset HEAD file可以把暂存区的修改撤销掉（unstage），重新放回工作区。既然是一个unstage操作，就可以配置一个unstage别名：
 
 $ git config --global alias.unstage 'reset HEAD'
 当你敲入命令：
@@ -479,22 +480,43 @@ $ git reset HEAD test.py
 
 $ git config --global alias.last 'log -1'
 这样，用git last就能显示最近一次的提交：
+```
+$ git config --global alias.last 'log -1'
 
+Administrator@DESKTOP-U24771V MINGW64 /e/gitRepository (master)
 $ git last
-commit adca45d317e6d8a4b23f9811c3d7b7f0f180bfe2
-Merge: bd6ae48 291bea8
-Author: Michael Liao <askxuefeng@gmail.com>
-Date:   Thu Aug 22 22:49:22 2013 +0800
+commit f76904cb110a85e6f075974ee102c26273fb8db4 (HEAD -> master)
+Author: xxx <xxxx@163.com>
+Date:   Thu Feb 10 11:31:22 2022 +0800
 
-    merge & fix hello.py
+    设置别名
+```
 甚至还有人丧心病狂地把lg配置成了：
 
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 来看看git lg的效果：
+```
+$ git lg
+* f76904c - (HEAD -> master) 设置别名 (84 minutes ago) <haohuajing>
+* 7217b01 - 使用gitee与githup差不多，只是国内比较方便 (17 hours ago) <haohuajing
+>
+* caeb170 - 创建标签结束 (17 hours ago) <haohuajing>
+* 5fddf6e - (origin/master) 多人协作完成 (20 hours ago) <haohuajing>
+* 8c0d5cb - feature分支完成 (21 hours ago) <haohuajing>
+*   6aebe2c - 同步dev的内容到master后修复冲突 (2 days ago) <haohuajing>
+|\
+| * a738afb - (dev) bug (2 days ago) <haohuajing>
+| * eae664c - 将bug修复的内容同步到dev上 (2 days ago) <haohuajing>
+| * c28908d - x (2 days ago) <haohuajing>
+* | ca42a72 - 修复bug，删除bug分支 (2 days ago) <haohuajing>
+* |   a912e54 - merged bug fix 101 (2 days ago) <haohuajing>
+|\ \
+| |/
+|/|
+| * 7ce0159 - 测试bug分支 (2 days ago) <haohuajing>
+|/
+```
 
-git-lg
-
-为什么不早点告诉我？别激动，咱不是为了多记几个英文单词嘛！
 
 配置文件
 配置Git的时候，加上--global是针对当前用户起作用的，如果不加，那只针对当前的仓库起作用。
@@ -515,8 +537,6 @@ $ cat .git/config
 [branch "master"]
     remote = origin
     merge = refs/heads/master
-[alias]
-    last = log -1
 别名就在[alias]后面，要删除别名，直接把对应的行删掉即可。
 
 而当前用户的Git配置文件放在用户主目录下的一个隐藏文件.gitconfig中：
